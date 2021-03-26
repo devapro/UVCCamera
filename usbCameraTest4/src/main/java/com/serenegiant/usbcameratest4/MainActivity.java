@@ -23,13 +23,13 @@
 
 package com.serenegiant.usbcameratest4;
 
-import android.app.Fragment;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-
+import androidx.fragment.app.Fragment;
 import com.serenegiant.common.BaseActivity;
+
 
 public class MainActivity extends BaseActivity {
 	private static final boolean DEBUG = false;
@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity {
 		if (savedInstanceState == null) {
 			if (DEBUG) Log.i(TAG, "onCreate:new");
 			final Fragment fragment = new CameraFragment();
-			getFragmentManager().beginTransaction()
+			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, fragment).commit();
 		}
 	}

@@ -23,34 +23,30 @@
 
 package com.serenegiant.service;
 
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaScannerConnection;
 import android.media.SoundPool;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.RemoteCallbackList;
-import android.os.RemoteException;
+import android.os.*;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
-
 import com.serenegiant.encoder.MediaAudioEncoder;
 import com.serenegiant.encoder.MediaEncoder;
 import com.serenegiant.encoder.MediaMuxerWrapper;
 import com.serenegiant.encoder.MediaSurfaceEncoder;
 import com.serenegiant.glutils.RenderHolderCallback;
 import com.serenegiant.glutils.RendererHolder;
-import com.serenegiant.usb.USBMonitor.UsbControlBlock;
 import com.serenegiant.usb.Size;
+import com.serenegiant.usb.USBMonitor.UsbControlBlock;
 import com.serenegiant.usb.UVCCamera;
 import com.serenegiant.usbcameratest4.R;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+
 
 public final class CameraServer extends Handler {
 	private static final boolean DEBUG = true;
@@ -202,7 +198,11 @@ public final class CameraServer extends Handler {
 
 	public void captureStill(final String path) {
 		if (mRendererHolder != null) {
-			mRendererHolder.captureStill(path);
+			try {
+				mRendererHolder.captureStill(path);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			sendMessage(obtainMessage(MSG_CAPTURE_STILL, path));
 		}
 	}

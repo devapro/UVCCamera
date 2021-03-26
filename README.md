@@ -5,6 +5,12 @@ Version with some fixes for build in Android studio 4.1.2
 
 =========
 
+### TODO
+- update examples
+- rewrite
+
+=========
+
 library and sample to access to UVC web camera on non-rooted Android device
 
 Copyright (c) 2014-2017 saki t_saki@serenegiant.com

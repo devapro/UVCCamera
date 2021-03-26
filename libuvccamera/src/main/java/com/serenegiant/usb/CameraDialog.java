@@ -23,13 +23,9 @@
 
 package com.serenegiant.usb;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.usb.UsbDevice;
@@ -42,11 +38,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.Spinner;
-
-import com.serenegiant.usb.DeviceFilter;
-import com.serenegiant.usb.USBMonitor;
-
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import com.serenegiant.uvccamera.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CameraDialog extends DialogFragment {
 	private static final String TAG = CameraDialog.class.getSimpleName();
@@ -61,10 +58,10 @@ public class CameraDialog extends DialogFragment {
 	 * @param parent FragmentActivity
 	 * @return
 	 */
-	public static CameraDialog showDialog(final Activity parent/* add parameters here if you need */) {
+	public static CameraDialog showDialog(final FragmentActivity parent/* add parameters here if you need */) {
 		CameraDialog dialog = newInstance(/* add parameters here if you need */);
 		try {
-			dialog.show(parent.getFragmentManager(), TAG);
+			dialog.show(parent.getSupportFragmentManager(), TAG);
 		} catch (final IllegalStateException e) {
 			dialog = null;
 		}
@@ -87,7 +84,6 @@ public class CameraDialog extends DialogFragment {
 		// Fragment need default constructor
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onAttach(final Activity activity) {
 		super.onAttach(activity);
@@ -137,7 +133,7 @@ public class CameraDialog extends DialogFragment {
 	 */
 	private final View initView() {
 		final View rootView = getActivity().getLayoutInflater().inflate(R.layout.dialog_camera, null);
-		mSpinner = (Spinner)rootView.findViewById(R.id.spinner1);
+		mSpinner = rootView.findViewById(R.id.spinner1);
 		final View empty = rootView.findViewById(android.R.id.empty);
 		mSpinner.setEmptyView(empty);
 		return rootView;
@@ -148,7 +144,7 @@ public class CameraDialog extends DialogFragment {
 	public void onResume() {
 		super.onResume();
 		updateDevices();
-	    final Button button = (Button)getDialog().findViewById(android.R.id.button3);
+		final Button button = getDialog().findViewById(android.R.id.button3);
 	    if (button != null) {
 	    	button.setOnClickListener(mOnClickListener);
 	    }
