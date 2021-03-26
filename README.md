@@ -1,6 +1,16 @@
 UVCCamera
 =========
 
+### What difference from saki4510t/UVCCamera :
+
+It is awesome library, thanks saki4510t, but origin repo doesn't update more than 2 years.
+My goal is update java part to modern components (may be rewrite some parts to kotlin)
+
+- develop - current update just to building in Android Studio 4.1.2
+- ft_android_x latest version
+
+=========
+
 library and sample to access to UVC web camera on non-rooted Android device
 
 Copyright (c) 2014-2017 saki t_saki@serenegiant.com
